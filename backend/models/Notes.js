@@ -17,7 +17,7 @@ const NotesSchema = new Schema({
     default: "General"
   },
   date:{
-    type:String,
+    type:Date,
     default: Date.now
   },
 
