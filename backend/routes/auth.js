@@ -81,7 +81,7 @@ router.post('/login', [
   }
 })
 
-//ROUTE3: Get logged User Details using: POST "/api/auth/getuser". no login required
+//Route 3: Get logged User Details using: POST "/api/auth/getuser". no login required
 router.post('/getuser', fetchuser,async (req, res) => {
 
   try {
