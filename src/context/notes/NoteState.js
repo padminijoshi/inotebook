@@ -1,6 +1,5 @@
 import React, { useState } from "react"; 
 import NoteContext from "./noteContext";
-
 const NoteState = (props) => {
   const host = "http://localhost:5000"
   const notesInitial = []
@@ -16,7 +15,6 @@ const NoteState = (props) => {
           }
         });
         const json = await response.json();
-        console.log(json);
         setNotes(json)
       }
       
@@ -32,20 +30,8 @@ const NoteState = (props) => {
          
           body: JSON.stringify({title,description,tag}), 
         });
-        const json = await response.json();
-        console.log(json);
-        console.log("Adding a new note")
-        const note = {
-          "_id": "657855e693e673d141c4c688",
-          "user": "657716cc432383833e0f1c72",
-          "title": title,
-          "description": description,
-          "tag": tag,
-          "date": "2023-12-12T12:45:26.629Z",
-          "__v": 0
-
-        };
-        setNotes(notes.concat(note)) 
+        const note = await response.json();
+        setNotes(notes.concat(note));
       }
 
       // Delete a Note
@@ -58,8 +44,6 @@ const NoteState = (props) => {
           }
         });
         const json = await response.json();
-        console.log(json)
-        console.log("Deleting the note with id" + id);
         const newNotes = notes.filter((note)=>{return note._id!==id})
         setNotes(newNotes)
       }
@@ -75,7 +59,6 @@ const NoteState = (props) => {
           body: JSON.stringify({title, description, tag})
         });
         const json = await response.json();
-        console.log(json);
         let newNotes = JSON.parse(JSON.stringify(notes))
         //logic to edit notes
         for (let index = 0; index < newNotes.length; index++) {
